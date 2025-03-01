@@ -1,0 +1,85 @@
+package com.personal.desafio_magalu_apirest.entities;
+
+import com.personal.desafio_magalu_apirest.entities.enums.StatusEnum;
+import jakarta.persistence.*;
+
+import java.time.LocalDateTime;
+
+@Entity
+@Table(name = "tb_notification")
+public class Notification {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    private LocalDateTime dateTime;
+    private String destination;
+    private String message;
+
+    @ManyToOne
+    @JoinColumn(name = "channel_id")
+    private Channel channel;
+
+    @Enumerated(EnumType.STRING)
+    private StatusEnum statusEnum;
+
+    public Notification() {
+    }
+
+    public Notification(LocalDateTime dateTime, String destination, String message, Channel channel, StatusEnum statusEnum) {
+        this.dateTime = dateTime;
+        this.destination = destination;
+        this.message = message;
+        this.channel = channel;
+        this.statusEnum = statusEnum;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public LocalDateTime getDateTime() {
+        return dateTime;
+    }
+
+    public void setDateTime(LocalDateTime dateTime) {
+        this.dateTime = dateTime;
+    }
+
+    public String getDestination() {
+        return destination;
+    }
+
+    public void setDestination(String destination) {
+        this.destination = destination;
+    }
+
+    public String getMessage() {
+        return message;
+    }
+
+    public void setMessage(String message) {
+        this.message = message;
+    }
+
+    public Channel getChannel() {
+        return channel;
+    }
+
+    public void setChannel(Channel channel) {
+        this.channel = channel;
+    }
+
+    public StatusEnum getStatus() {
+        return statusEnum;
+    }
+
+    public void setStatus(StatusEnum statusEnum) {
+        this.statusEnum = statusEnum;
+    }
+}
