@@ -13,7 +13,15 @@ public record NotificationDTO(LocalDateTime dateTime,
 
 
     public Notification toNotification() {
-        return new Notification(dateTime, destination, message, null, StatusEnum.PENDING
+
+        ChannelEnum channelEnum = ChannelEnum.valueOf(String.valueOf(this.channel).toUpperCase());
+
+        return new Notification(
+                this.dateTime,
+                this.destination,
+                this.message,
+                channelEnum,
+                StatusEnum.PENDING
         );
     }
 }

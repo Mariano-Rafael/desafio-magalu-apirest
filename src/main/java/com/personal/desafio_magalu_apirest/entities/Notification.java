@@ -1,5 +1,6 @@
 package com.personal.desafio_magalu_apirest.entities;
 
+import com.personal.desafio_magalu_apirest.entities.enums.ChannelEnum;
 import com.personal.desafio_magalu_apirest.entities.enums.StatusEnum;
 import jakarta.persistence.*;
 
@@ -17,9 +18,8 @@ public class Notification {
     private String destination;
     private String message;
 
-    @ManyToOne
-    @JoinColumn(name = "channel_id")
-    private Channel channel;
+    @Enumerated(EnumType.STRING)
+    private ChannelEnum channel;
 
     @Enumerated(EnumType.STRING)
     private StatusEnum statusEnum;
@@ -27,20 +27,12 @@ public class Notification {
     public Notification() {
     }
 
-    public Notification(LocalDateTime dateTime, String destination, String message, Channel channel, StatusEnum statusEnum) {
+    public Notification(LocalDateTime dateTime, String destination, String message, ChannelEnum channel, StatusEnum statusEnum) {
         this.dateTime = dateTime;
         this.destination = destination;
         this.message = message;
         this.channel = channel;
         this.statusEnum = statusEnum;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
     }
 
     public LocalDateTime getDateTime() {
@@ -67,19 +59,19 @@ public class Notification {
         this.message = message;
     }
 
-    public Channel getChannel() {
+    public ChannelEnum getChannel() {
         return channel;
     }
 
-    public void setChannel(Channel channel) {
+    public void setChannel(ChannelEnum channel) {
         this.channel = channel;
     }
 
-    public StatusEnum getStatus() {
+    public StatusEnum getStatusEnum() {
         return statusEnum;
     }
 
-    public void setStatus(StatusEnum statusEnum) {
+    public void setStatusEnum(StatusEnum statusEnum) {
         this.statusEnum = statusEnum;
     }
 }

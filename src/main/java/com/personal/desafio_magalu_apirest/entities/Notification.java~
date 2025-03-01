@@ -1,5 +1,6 @@
 package com.personal.desafio_magalu_apirest.entities;
 
+import com.personal.desafio_magalu_apirest.entities.enums.ChannelEnum;
 import com.personal.desafio_magalu_apirest.entities.enums.StatusEnum;
 import jakarta.persistence.*;
 
@@ -17,9 +18,8 @@ public class Notification {
     private String destination;
     private String message;
 
-    @ManyToOne
-    @JoinColumn(name = "channel_id")
-    private Channel channel;
+    @Enumerated(EnumType.STRING)
+    private ChannelEnum channel;
 
     @Enumerated(EnumType.STRING)
     private StatusEnum statusEnum;
@@ -27,8 +27,7 @@ public class Notification {
     public Notification() {
     }
 
-    public Notification(Long id, LocalDateTime dateTime, String destination, String message, Channel channel, StatusEnum statusEnum) {
-        this.id = id;
+    public Notification(LocalDateTime dateTime, String destination, String message, Channel channel, StatusEnum statusEnum) {
         this.dateTime = dateTime;
         this.destination = destination;
         this.message = message;
